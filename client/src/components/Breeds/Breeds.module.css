@@ -1,0 +1,13 @@
+.container{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  justify-content: center;
+  align-content: center;
+  padding: 15px;
+  gap: 3em;
+  /* border: 10px solid red; */
+}
+ .pagination {
+padding-top: 15px;
+  padding-bottom: 30px;
+ }

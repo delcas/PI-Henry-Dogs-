@@ -1,0 +1,15 @@
+.error {
+  /* border: 1px solid rgb(30, 5, 255); */
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: rgb(255, 255, 255);
+  text-transform: uppercase;
+  
+}
+
+.img{
+  all: unset;
+  /* width: 300px; */
+  height: 200px;
+
+}
