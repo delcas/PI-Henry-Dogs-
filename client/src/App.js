@@ -1,19 +1,25 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import Init from "./components/Init/Init.jsx";
-import Breeds from "./components/Breeds/Breeds.jsx"
-import Id from "./components/Id/Id";
+import LandingPage from "./components/LandingPage/LandingPage.jsx";
+import Breeds from "./components/Breeds/Breeds.jsx";
+import DetailId from "./components/DetailId/DetailId";
+import Form from "./components/Form/Form";
+import About from "./components/About/About";
+import NotFound from "./components/NotFound/NotFound";
+import axios from "axios";
+
+axios.defaults.baseURL=`http://localhost:3001/`
 
 function App() {
-
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Init />} />
-        <Route path="/home" element={<Breeds/>} />
-        <Route path="/breed/:id" element={<Id/>} />
-        <Route path="/create" />
-        <Route path="/about" />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/home" element={<Breeds />} />
+        <Route path="/breed/:id" element={<DetailId />} />
+        <Route path="/create" element ={<Form/>}/>
+        <Route path="/about" element = {<About/>}/>
+        <Route path="*" element = {<NotFound/>}/>
       </Routes>
     </div>
   );

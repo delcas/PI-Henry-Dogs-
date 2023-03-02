@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import axios from "axios";
-import styles from "./Id.module.css";
+import styles from "./DetailId.module.css";
 import NotFound from "../NotFound/NotFound";
 import Loading from "../Loading/Loading";
 
-export default function Id() {
+export default function DetailId() {
   const { id } = useParams();
   const [dog, setDog] = useState();
   const [error,setError] = useState()
@@ -13,7 +13,7 @@ export default function Id() {
 
   useEffect(() => {
     axios
-      .get (`http://localhost:3001/dogs/${id}`)
+      .get (`/dogs/${id}`)
       .then((response) => {
         setDog(response.data);
         setLoading(false)
@@ -67,7 +67,7 @@ export default function Id() {
             </h3>
           </div>
           <h3 className={styles.id}>
-            <a>Id: {dog.id}</a>
+            <b>Id: {dog.id}</b>
           </h3>
         </div>
         <div className={styles.footer}>

@@ -1,31 +1,60 @@
 
 
-.image{
-  all: unset;
-  width: 300px;
-  height: 300px;
 
-}
 .container{
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+  /* border: solid red 1px; */
 }
 
 .container .card{
+  /* border: solid rgb(255, 38, 0) 1px; */
   width: 800px;
   height: 500px;
-  display: grid;
-  grid-template-columns: 1fr 3fr;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background: #232323;
   border-radius: 20px;
   overflow: hidden;
-  grid-gap: 10px;
+  /* grid-gap: 10px; */
 }
 
-.header, .footer {
-  grid-column: 1 / -1;
+.header {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 80px;
+  /* border: solid rgb(0, 26, 255) 1px; */
+  /* grid-column: 1 / -1; */
   /* needed for the floated layout */
   clear: both;
   z-index: 10;
+  margin: auto;
+  margin-top: 10px;
+}
+.footer {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 80px;
+  /* border: solid rgb(0, 26, 255) 1px; */
+  /* grid-column: 1 / -1; */
+  /* needed for the floated layout */
+  clear: both;
+  z-index: 10;
+ margin-bottom: 20px;
+
 }
 .sidebar {
   float: left;
@@ -43,11 +72,13 @@
   clip-path: circle(150px at 50% 50%);
 }
 .content {
-  float: right;
-  width: 79.7872%;
+  flex: 1;
+  /* border: solid rgb(0, 26, 255) 1px; */
+  width: 90%;
+  /* float: right;
+  width: 79.7872%; */
   z-index: 10;
 
-  transform: translate(10%,8%);
 }
 
 
@@ -59,6 +90,7 @@
   width: 100%;
   height: 100%;
   background: #e98707;
+  border-radius: 20px;
   clip-path: circle(300px at 10% 50%);
   /* clip-path: circle(150px at 50% 0%); */
   transition: 0.5s ease-in-out;
@@ -69,7 +101,7 @@
 }
 
 .container .card:after{
-  content: 'Breed';
+  content: 'About';
   position: absolute;
   top: 80%;
   right: 7%;
@@ -79,7 +111,7 @@
   color: rgba(255,255,25,0.05)
 }
 .container:hover .card:after{
-  content: 'Breed';
+  content: 'About';
   position: absolute;
   top: 2%;
   right: 7%;
@@ -100,15 +132,16 @@
 }
 
 /* letras texto */
-.container .card .content .size h3, .container .card .content .temperaments h3{
-  width: 400px;
+.container .card .content .size , .container .card .content .temperaments p{
+  margin: auto;
+  width: 600px;
   color: rgb(255, 255, 255);
   -webkit-text-stroke: 0.1px #000000;
   font-weight: 300;
-  font-size: 14px;
-  text-transform: uppercase;
+  font-size: 20px;
   letter-spacing: 2px;
-  margin-right: 10px;
+  margin-top: 30px;
+
 }
 .container .card:hover .content .size h3,.container .card:hover .content .temperaments h3{
   color: rgb(0, 0, 0);
@@ -133,3 +166,32 @@
   transition: 0.75s;
 }
 
+.img{
+  position: relative;
+  width: 50px;
+  height: 50px;
+  margin: auto;
+  margin-left: 40px;
+  margin-right: 40px;
+  box-shadow: 0 0 10px #fff;
+}
+.img::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%; /* Radio del borde del resplandor */
+  filter: blur(30px); /* Desenfoque del resplandor */
+  opacity: 0.5; /* Opacidad del resplandor */
+  z-index: -1;
+  box-shadow: 0 0 50px 10px white; /* Color y tamaño del resplandor */
+}
+.logosLinks{
+  position: relative;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

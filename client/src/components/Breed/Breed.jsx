@@ -1,3 +1,6 @@
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import {getAllBreeds} from "../../redux/actions"
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./Breed.module.css";
@@ -8,7 +11,7 @@ export default function Home(props) {
 
   return (
     <div className={styles.container} key={id}>
-      <div className={styles.card}>
+      <div className={styles.card} key={name}>
         <div className={styles.img}>
           <img className={styles.image} src={image} alt={name} />
         </div>

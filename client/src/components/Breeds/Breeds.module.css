@@ -11,3 +11,9 @@
 padding-top: 15px;
   padding-bottom: 30px;
  }
+
+ .nav{
+  position: fixed;
+  top: 0px;
+  z-index: 999;
+ }

@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -L",
+    "start": "node index.js",
     "test": "mocha -w ./tests/**/*.spec.js",
-    "dev": "nodemon prueba.js"
+    "dev": "nodemon -L"
 
   },
   "author": "Henry",

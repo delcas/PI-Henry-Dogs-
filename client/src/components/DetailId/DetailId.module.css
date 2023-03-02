@@ -1,0 +1,135 @@
+
+
+.image{
+  all: unset;
+  width: 300px;
+  height: 300px;
+
+}
+.container{
+  position: relative;
+}
+
+.container .card{
+  width: 800px;
+  height: 500px;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  background: #232323;
+  border-radius: 20px;
+  overflow: hidden;
+  grid-gap: 10px;
+}
+
+.header, .footer {
+  grid-column: 1 / -1;
+  /* needed for the floated layout */
+  clear: both;
+  z-index: 10;
+}
+.sidebar {
+  float: left;
+  width: 19.1489%;
+  z-index: 10;
+}
+.sidebar .image {
+  transform: translateX(7%);
+  z-index: 10000;
+  transition: 0.5s;
+  clip-path: circle(150px at 50% 50%);
+}
+.sidebar .image:hover {
+  /* transform: scale(120%); */
+  clip-path: circle(150px at 50% 50%);
+}
+.content {
+  float: right;
+  width: 79.7872%;
+  z-index: 10;
+
+  transform: translate(10%,8%);
+}
+
+
+.container .card:before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #e98707;
+  clip-path: circle(300px at 10% 50%);
+  /* clip-path: circle(150px at 50% 0%); */
+  transition: 0.5s ease-in-out;
+}
+
+.container .card:hover:before{
+  clip-path: circle(300px at 70% 50%);
+}
+
+.container .card:after{
+  content: 'Breed';
+  position: absolute;
+  top: 80%;
+  right: 7%;
+  font-size: 6em;
+  font-weight: 800;
+  font-style: italic;
+  color: rgba(255,255,25,0.05)
+}
+.container:hover .card:after{
+  content: 'Breed';
+  position: absolute;
+  top: 2%;
+  right: 7%;
+  font-size: 6em;
+  font-weight: 800;
+  font-style: italic;
+  color: rgba(54, 54, 54, 0.322);
+  transition: 0.75s;
+}
+
+.container .card .header h2 {
+  /* border: 1px solid rgb(30, 5, 255); */
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: rgb(255, 255, 255);
+  text-transform: uppercase;
+  
+}
+
+/* letras texto */
+.container .card .content .size h3, .container .card .content .temperaments h3{
+  width: 400px;
+  color: rgb(255, 255, 255);
+  -webkit-text-stroke: 0.1px #000000;
+  font-weight: 300;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-right: 10px;
+}
+.container .card:hover .content .size h3,.container .card:hover .content .temperaments h3{
+  color: rgb(0, 0, 0);
+  transition: 0.75s;
+}
+
+/* cuadro home - id */
+.container .card .footer a, .container .card .content .id b { 
+  display: inline-block;
+  padding: 10px 20px;
+  background: #fff;
+  border-radius: 4px;
+  margin-top: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  color: #111;
+}
+
+.container .card:hover .content .id b{
+  background: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  transition: 0.75s;
+}
+

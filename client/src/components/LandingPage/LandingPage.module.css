@@ -1,8 +1,6 @@
-
 :root {
   --glow-color: rgb(255, 81, 0);
 }
-
 
 .glowingbtn {
   position: relative;
@@ -96,11 +94,26 @@
   opacity: 1;
 }
 
-.load{
+.load {
   position: absolute;
   top: 20%;
   left: 41%;
+}
+#div {
+  transform: translateY(-10%);
+}
 
+.background {
+  height: 600px;
+  width: 1350px;
+  background-image: url("../../img/background.jpg");
+  background-repeat: no-repeat;
+  /* width: 100vh; */
+
+  /* border: solid 2px rgb(255, 255, 255); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @keyframes faulty-flicker {
@@ -202,7 +215,7 @@
 }
 
 @media only screen and (max-width: 600px) {
-  .glowing-btn{
+  .glowing-btn {
     font-size: 1em;
   }
 }

@@ -1,4 +1,3 @@
-const { Dog, Temperament } = require("../db.js");
 const { getDog, getApiDogs,getDBdogs } = require("./utils/utils.js");
 
 //controlador de ruta /dogs y /dogs?name="..."
