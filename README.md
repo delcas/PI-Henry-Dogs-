@@ -1,9 +1,5 @@
 ## Link for the deployed app
 - <https://pi-dogs-deploy-henna.vercel.app/>
-<<<<<<< HEAD
-=======
-
->>>>>>> 206621f6f79d09cec47bb3f6756d81168a97a234
 
 # Individual Project - Henry Dogs
 
@@ -25,22 +21,4 @@
 
 -The Client was developed with React, React Router Dom, React Redux, Redux, Html and pure Css  as main tools.
 
-<<<<<<< HEAD
 
-
-
-=======
-## Link for the deployed app
-
-- <https://api.thedogapi.com/v1/breeds>
-
-
-
-
-
-
-
-
-
-
->>>>>>> 206621f6f79d09cec47bb3f6756d81168a97a234
