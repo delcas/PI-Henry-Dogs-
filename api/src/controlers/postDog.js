@@ -3,7 +3,19 @@ const { verifyValues, verifyName } = require("./utils/utils.js");
 
 //controlador de solicitud POST a ruta /dogs
 const postDog = async (data) => {
-  const {name, height_min, height_max, weight_min, weight_max, life, image, temperament,} = data;
+  const {
+    name,
+    height_min,
+    height_max,
+    weight_min,
+    weight_max,
+    life,
+    temperament,
+  } = data;
+  let { image } = data;
+  if (!image) {
+    image = "https://i.ibb.co/znL6nKy/dog-no-image.png";
+  }
   //verificar si existe raza
   await verifyName(name);
 
@@ -14,7 +26,15 @@ const postDog = async (data) => {
   if (name || height_min || height_max || weight_min || weight_max) {
     if (temperament) {
       console.log("POST request /dog: creating new dog with temperaments");
-      const dogs = await Dog.create({name, height_min, height_max, weight_min, weight_max, life, image,});
+      const dogs = await Dog.create({
+        name,
+        height_min,
+        height_max,
+        weight_min,
+        weight_max,
+        life,
+        image,
+      });
       // convertir a array temperament obtenido por body
       arrayTemp = temperament.split(", ");
       // filtrar los ID de la tabla temperament
@@ -24,26 +44,39 @@ const postDog = async (data) => {
         },
       })
         .then((temperaments) => {
+          // filtrar ids de temperaments obtenidos
           const ids = temperaments.map((temperament) => temperament.id);
           //relacionar ids con tabla temperaments
           dogs.addTemperament(ids);
-          // console.log(ids);
         })
         .catch((error) => {
           console.error(error);
         });
 
-      //retornar raza de perro creada
+      //retornar mensaje y raza de perro creada
       let rest = Object.values(dogs)[0];
-      dogCreated = {
-        ...rest,
-        temperament: temperament,
-      };
+
+      dogCreated = [
+        { msj: `Breed dog ${name} created` },
+        {
+          ...rest,
+          temperament: temperament,
+        },
+      ];
       return dogCreated;
     } else {
       console.log("POST request /dog: creating new dog");
-      const dogs = await Dog.create({name, height_min, height_max, weight_min, weight_max, life, image,});
-      return dogs;
+      const dogs = await Dog.create({
+        name,
+        height_min,
+        height_max,
+        weight_min,
+        weight_max,
+        life,
+        image,
+      });
+      dogCreated = [{ msj: `Breed dog ${name} created` }, dogs];
+      return dogCreated;
     }
   } else {
     console.log("POST request /dog: Error");

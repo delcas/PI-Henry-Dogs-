@@ -33,6 +33,7 @@ export default function Pagination(props) {
           key={number}
           id={number}
           onClick={handleClick}
+          value={currentPage}
           className={`${styles.button} ${
             currentPage === number ? styles.active : ""
           }`}

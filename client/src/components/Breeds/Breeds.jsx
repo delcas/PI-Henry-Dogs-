@@ -23,13 +23,24 @@ export default function Home() {
     dispatch(getAllBreeds(order));
   }, []);
   //filtrar la data del estado
-
-
-
+let currentItems = []
   // constantes para paginacion
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = breeds.slice(indexOfFirstItem, indexOfLastItem);
+  if (breeds.length > 8) {
+    // console.log(currentPage);
+    const maxItems = Math.ceil(breeds.length/itemsPerPage)
+    if (currentPage > maxItems){
+      setCurrentPage(1)
+    }
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    currentItems = breeds.slice(indexOfFirstItem, indexOfLastItem);
+    console.log(indexOfLastItem);
+  } else {
+    currentItems = breeds.slice(0, 8);
+  }
+  // console.log(breeds.length > 8);
+  // console.log(currentItems);
+  
 
   return (
     <div>

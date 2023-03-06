@@ -20,7 +20,7 @@ export default function Form() {
     life_min: 0,
     life_max: 0,
     image: "",
-    file: [],
+    file: null,
     temperament: "",
   });
   const [error, setError] = useState({
@@ -141,8 +141,25 @@ export default function Form() {
       }
     }
   };
+
+  ///--------------------------------------------------------------
   ///validar y enviar el formulario
   const handleSubmit = (e) => {
+    //validar si hay archivo imagen
+    // if (inputs.file) {
+    //   const formData = new FormData();
+    //   formData.append("file", inputs.file);
+    //   axios
+    //   .post("/image", formData)
+    //   .then((response) => {
+    //     console.log(response);
+    //     // aquí puedes hacer algo con la respuesta
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     // aquí puedes manejar el error
+    //   });
+    // }
     if (inputs.name === "" || inputs.name === undefined || error.name) {
       e.preventDefault();
       window.alert("The breed name field contains errors");
@@ -162,6 +179,7 @@ export default function Form() {
       e.preventDefault();
       window.alert("You must select at least one temperament");
     } else {
+      // e.preventDefault();
       // objeto a enviar
       const jsonSend = {
         name: inputs.name,
@@ -170,24 +188,28 @@ export default function Form() {
         height_min: Number(inputs.height_min),
         height_max: Number(inputs.height_max),
         life: inputs.life_min + " - " + inputs.life_max + " years",
-        image: inputs.image ? inputs.image : "https://i.ibb.co/znL6nKy/dog-no-image.png",
+        image: inputs.image
+          ? inputs.image
+          : "https://i.ibb.co/znL6nKy/dog-no-image.png",
         temperament: inputs.temperament,
       };
+
       axios
         .post("/dogs", jsonSend)
         .then((res) => {
-          console.log(`Breed dog ${res.data.name} created`);
+          // window.alert(res.data[0].msj);
+          console.log(res.data[0].msj);
         })
         .catch((error) => {
           console.log(error);
           window.alert(error.response.data.err);
         });
-        window.alert(`Breed dog ${jsonSend.name} created`);
+      window.alert(`Breed dog ${jsonSend.name} created`);
     }
   };
 
   return (
-    <div >
+    <div>
       {loading ? (
         <div>
           <Loading />
@@ -197,17 +219,25 @@ export default function Form() {
           <div className={styles.title}>
             <h1>CREATE BREED DOG</h1>
             <div>
-              <NavLink  id={styles.navlink} to={`/home`}>
+              <NavLink id={styles.navlink} to={`/home`}>
                 <button className={styles.home}>Back to Home</button>
               </NavLink>
             </div>
           </div>
           <div className={styles.formContainer2}>
-            <form className={styles.formContainer} onSubmit={handleSubmit}>
+            <form
+              className={styles.formContainer}
+              // action="/image"
+              // method="post"
+              // enctype="multipart/form-data"
+              onSubmit={handleSubmit}
+            >
               {/* /////////////////////name /////////////////*/}
               <label className={styles.label}>*Breed name: </label>
               <input
-                className={error.name ? styles.inputNameWarning : styles.inputName}
+                className={
+                  error.name ? styles.inputNameWarning : styles.inputName
+                }
                 key="name"
                 name="name"
                 placeholder="Breed Name"
@@ -340,7 +370,11 @@ export default function Form() {
                 onChange={handleSelect}
               >
                 {temperaments.map((temp) => {
-                  return <option key={temp} value={temp}>{temp}</option>;
+                  return (
+                    <option key={temp} value={temp}>
+                      {temp}
+                    </option>
+                  );
                 })}
               </select>
               {/* /////////////////////select /////////////////*/}

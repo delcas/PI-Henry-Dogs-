@@ -24,11 +24,15 @@ export default function Nav() {
   //traer los estados
   const order = useSelector((state) => state.order);
   const searchState = useSelector((state) => state.search);
+  const state1 = useSelector((state) => state.breeds);
   const state2 = useSelector((state) => state.breedSearch);
   //nuevo estado para barra search
   const [searchReact, setSearchReact] = useState(null);
 
   const dispatch = useDispatch();
+  // console.log("estado 2",state2);
+  // console.log("estado 1",state1);
+  
 
   //buscar por nombre id o temperamento
   useEffect(() => {
@@ -152,7 +156,6 @@ export default function Nav() {
         <select name="select" className={styles.select} onChange={handleSearch}>
           <option value="Name">Name</option>
           <option value="Temperament">Temperament</option>
-          <option value="Id">Id</option>
         </select>
       </div>
     </div>
