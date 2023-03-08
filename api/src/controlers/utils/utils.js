@@ -148,6 +148,11 @@ const getJson = (dog) => {
     temperament: dog.temperament,
   };
 };
+
+const ImageUploader =(file)=>{
+  return `http://localhost:3001/${file.filename}`
+}
+
 //----------------------------------------------------------------------
 module.exports = {
   extractWeightValues,
@@ -159,4 +164,5 @@ module.exports = {
   verifyName,
   fillTable,
   getDBdogs,
+  ImageUploader,
 };

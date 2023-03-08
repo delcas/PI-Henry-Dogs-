@@ -11,11 +11,11 @@ export function validation(data, key) {
     errors.name = "Name cannot be longer than 30 characters";
   else if (key) errors.name = "Dog breed already exists";
 
-  if (!regexNumber.test(data.height_min) || !regexNumber.test(data.height_max) )errors.height = "Only positive numbers +"
+  if (!regexNumber.test(data.height_min) || !regexNumber.test(data.height_max) )errors.height = "The height must only contain positives numbers (not symbols, not letters)"
 
-  if (!regexNumber.test(data.weight_min) || !regexNumber.test(data.weight_max))errors.weight = "Only positive numbers +"
+  if (!regexNumber.test(data.weight_min) || !regexNumber.test(data.weight_max))errors.weight = "The weight must only contain positives numbers (not symbols, not letters)"
 
-  if (!regexNumber.test(data.life_min)|| !regexNumber.test(data.life_max))errors.life = "Only positive numbers +"
+  if (!regexNumber.test(data.life_min)|| !regexNumber.test(data.life_max))errors.life = "The life must only contain positives numbers (not symbols, not letters)"
 
   return errors;
 }

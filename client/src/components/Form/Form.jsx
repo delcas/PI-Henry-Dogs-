@@ -7,10 +7,13 @@ import styles from "./Form.module.css";
 import { validation } from "./validation";
 
 export default function Form() {
+  const URL = "http://localhost:3001/";
   const [temperaments, setTemperaments] = useState([]);
   const [names, setNames] = useState([]);
   const [select, setSelect] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [file, setFile] = useState(null);
+  const [imageFile, setImageFile] = useState("");
   const [inputs, setInputs] = useState({
     name: "",
     weight_min: 0,
@@ -142,26 +145,17 @@ export default function Form() {
     }
   };
 
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
   ///--------------------------------------------------------------
   ///validar y enviar el formulario
   const handleSubmit = (e) => {
+    e.preventDefault();
     //validar si hay archivo imagen
-    // if (inputs.file) {
-    //   const formData = new FormData();
-    //   formData.append("file", inputs.file);
-    //   axios
-    //   .post("/image", formData)
-    //   .then((response) => {
-    //     console.log(response);
-    //     // aquí puedes hacer algo con la respuesta
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     // aquí puedes manejar el error
-    //   });
-    // }
+
     if (inputs.name === "" || inputs.name === undefined || error.name) {
-      e.preventDefault();
       window.alert("The breed name field contains errors");
     } else if (
       inputs.weight_max <= inputs.weight_min ||
@@ -171,15 +165,26 @@ export default function Form() {
       error.weight ||
       error.life
     ) {
-      e.preventDefault();
       window.alert(
         "The values of 'Height maximum', 'Weight maximum', 'Life maximum' must be greater than 'Height minimun', 'Weight minimun', 'Life minimun' values"
       );
     } else if (inputs.temperament === "") {
-      e.preventDefault();
       window.alert("You must select at least one temperament");
+    } else if (file) {
+      const formData = new FormData();
+      formData.append("file", file);
+      axios
+        .post("/image", formData)
+        .then((response) => {
+          const res = response.data.path;
+          console.log(res);
+          setImageFile(res);
+          console.log(imageFile);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } else {
-      // e.preventDefault();
       // objeto a enviar
       const jsonSend = {
         name: inputs.name,
@@ -188,23 +193,24 @@ export default function Form() {
         height_min: Number(inputs.height_min),
         height_max: Number(inputs.height_max),
         life: inputs.life_min + " - " + inputs.life_max + " years",
-        image: inputs.image
+        image: imageFile
+          ? imageFile
+          : inputs.image
           ? inputs.image
           : "https://i.ibb.co/znL6nKy/dog-no-image.png",
         temperament: inputs.temperament,
       };
-
       axios
         .post("/dogs", jsonSend)
         .then((res) => {
-          // window.alert(res.data[0].msj);
-          console.log(res.data[0].msj);
+          window.alert(res.data[0].msj);
+          window.location.reload();
         })
         .catch((error) => {
           console.log(error);
           window.alert(error.response.data.err);
         });
-      window.alert(`Breed dog ${jsonSend.name} created`);
+      // window.alert(`Breed dog ${jsonSend.name} created`);
     }
   };
 
@@ -225,13 +231,7 @@ export default function Form() {
             </div>
           </div>
           <div className={styles.formContainer2}>
-            <form
-              className={styles.formContainer}
-              // action="/image"
-              // method="post"
-              // enctype="multipart/form-data"
-              onSubmit={handleSubmit}
-            >
+            <form className={styles.formContainer} onSubmit={handleSubmit}>
               {/* /////////////////////name /////////////////*/}
               <label className={styles.label}>*Breed name: </label>
               <input
@@ -358,7 +358,7 @@ export default function Form() {
                 type="file"
                 placeholder="select file"
                 value={inputs.file}
-                onChange={handleInputs}
+                onChange={handleFileChange}
               />
               <br></br>
               {/* ////////////////////temperaments ////////////////*/}

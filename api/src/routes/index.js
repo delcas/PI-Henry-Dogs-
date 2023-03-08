@@ -21,7 +21,7 @@ const {getDogs}= require("../controlers/getDogs.js");
 const { getID } = require('../controlers/getDogsId.js');
 const { getTemp } = require('../controlers/getTemperament.js');
 const {postDog}= require("../controlers/postDog.js");
-const { fillTable } = require('../controlers/utils/utils.js');
+const { fillTable, ImageUploader } = require('../controlers/utils/utils.js');
 
 const router = Router();
 
@@ -68,7 +68,9 @@ router.post('/image',upload.single("file") , async (req,res)=>{
   const file = req.file
   console.log(file);
 try {
-  res.status(200).json({ path: file })
+  const url = ImageUploader(file)
+  console.log(url.url);
+  res.status(200).json({url})
 } catch (error) {
   res.status(400).json({ err: error.message } );
 }
